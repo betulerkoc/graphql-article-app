@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <Nav defaultActiveKey="/" as="ul">
-      <Nav.Item as="li">
+    <Nav className="justify-content-center" activeKey="/">
+      <Nav.Item>
         <Link to="/">Home</Link>
       </Nav.Item>
-      <Nav.Item as="li">
+      <Nav.Item>
         <Link to="/new">New Post</Link>
       </Nav.Item>
     </Nav>

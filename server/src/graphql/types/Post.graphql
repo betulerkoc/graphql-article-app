@@ -8,16 +8,22 @@ type Post {
     title: String!
     user_id: ID!
     user: User!
+    cover: String
+    description: String
     comments: [Comment!]!
 }
 
 input CreatePostInput {
     title: String!
+    description: String  
+    cover: String
     user_id: ID!
 }
 
 input UpdatePostInput {
     title: String
+    description: String
+    cover: String
     user_id: ID
 }
 

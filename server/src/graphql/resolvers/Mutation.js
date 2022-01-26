@@ -6,6 +6,8 @@ const Mutation = {
     const user = {
       id: nanoid(),
       fullName: data.fullName,
+      age: data.age,
+      image: data.image
     };
     db.users.push(user);
     pubsub.publish("userCreated", { userCreated: user });
@@ -55,6 +57,8 @@ const Mutation = {
       id: nanoid(),
       title: data.title,
       user_id: data.user_id,
+      description: data.description,
+      cover: data.cover
     };
     db.posts.push(post);
     pubsub.publish("postCreated", { postCreated: post });

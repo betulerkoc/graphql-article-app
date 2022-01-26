@@ -7,6 +7,7 @@ type User {
     id: ID!
     fullName: String!
     age: Int!
+    image: String
     posts: [Post!]!
     comments: [Comment!]!
 }
@@ -14,11 +15,13 @@ type User {
 input CreateUserInput {
     fullName: String!
     age: Int!
+    image: String
 }
 
 input UpdateUserInput {
     fullName: String
     age: Int
+    image: String
 }
 
 type Mutation {

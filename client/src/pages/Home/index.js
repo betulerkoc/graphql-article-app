@@ -1,38 +1,22 @@
-import { Row, Col, ListGroup, Image } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
+import Post from "../../components/Post";
+import { gql, useQuery } from "@apollo/client";
+import {GET_ALL_POSTS} from "./queries";
 
 function Home() {
+  const { loading, error, data } = useQuery(GET_ALL_POSTS);
+
+  if (loading) {
+    return <h1>Loading</h1>
+  } 
+  if (error) {
+    return <h1>Error: {error.message}</h1>
+  } 
+
   return (
-      <ListGroup variant="flush">
-        <ListGroup.Item>
-          <Row>
-            <Col sm={2}>
-              {" "}
-              <Image
-                src="https://randomuser.me/api/portraits/women/44.jpg"
-                rounded
-              />
-            </Col>
-            <Col sm={10}>
-              <h1>Title</h1>
-              <p>Description</p>
-            </Col>
-          </Row>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Row>
-            <Col sm={2}>
-              <Image
-                src="https://randomuser.me/api/portraits/women/57.jpg"
-                rounded
-              />
-            </Col>
-            <Col sm={10}>
-              <h1>Title</h1>
-              <p>Description</p>
-            </Col>
-          </Row>
-        </ListGroup.Item>
-      </ListGroup>
+    <ListGroup variant="flush">
+      {data.posts.map((post) => <Post key={post.id} data={post}/> )}
+    </ListGroup>
   );
 }
 
