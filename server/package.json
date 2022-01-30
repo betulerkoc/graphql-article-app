@@ -1,5 +1,5 @@
 {
-  "name": "graphql-comments",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "data.js",
@@ -23,7 +23,9 @@
     "@graphql-tools/merge": "8.2.0",
     "apollo-server": "^3.6.2",
     "apollo-server-core": "^3.6.2",
+    "dotenv": "^14.3.2",
     "graphql-yoga": "^1.18.3",
+    "mongoose": "^6.1.8",
     "nanoid": "^3.2.0"
   }
 }
