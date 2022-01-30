@@ -7,9 +7,17 @@ export const GET_POST = gql`
       title
       description
       cover
-      user{
+      user {
         fullName
-    }
+      }
+      comments{
+        id
+        text
+        user{
+          id
+          fullName
+        }
+      }
     }
   }
 `;

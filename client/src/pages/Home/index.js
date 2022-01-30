@@ -1,6 +1,6 @@
 import { ListGroup } from "react-bootstrap";
 import Post from "../../components/Post";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {GET_ALL_POSTS} from "./queries";
 
 function Home() {
