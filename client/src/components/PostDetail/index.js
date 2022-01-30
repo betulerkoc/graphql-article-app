@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "./queries";
 import Comment from "../Comment";
+import CommentForm from "../CommentForm";
 
 function PostDetail() {
   const { id } = useParams();
@@ -36,8 +37,9 @@ function PostDetail() {
           <h6>Comments</h6>
           <Comment />
           {comments.map((comment) => (
-            <Comment commentData={comment} key={comment.id}/>
+            <Comment commentData={comment} key={comment.id} />
           ))}
+          <CommentForm post_id={id} />
         </Col>
       </Row>
     </Container>

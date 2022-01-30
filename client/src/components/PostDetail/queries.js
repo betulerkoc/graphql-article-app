@@ -8,6 +8,7 @@ export const GET_POST = gql`
       description
       cover
       user {
+        id
         fullName
       }
       comments{
