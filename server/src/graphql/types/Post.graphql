@@ -16,14 +16,14 @@ input CreatePostInput {
     title: String!
     description: String  
     cover: String
-    user_id: ID!
+    user: ID!
 }
 
 input UpdatePostInput {
     title: String
     description: String
     cover: String
-    user_id: ID
+    user: ID
 }
 
 type Mutation {

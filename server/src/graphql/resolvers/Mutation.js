@@ -2,150 +2,132 @@ const { nanoid } = require("nanoid");
 
 const Mutation = {
   //User
-  createUser: (_, { data }, { pubsub, db }) => {
-    const user = {
-      id: nanoid(),
-      fullName: data.fullName,
-      age: data.age,
-      image: data.image
-    };
-    db.users.push(user);
+  createUser: async (_, { data }, { pubsub, _db }) => {
+    const newUser = new _db.User({
+      ...data,
+    });
+    const user = await newUser.save();
     pubsub.publish("userCreated", { userCreated: user });
     return user;
   },
 
-  updateUser: (_, { id, data }, { pubsub, db }) => {
-    const user_index = db.users.findIndex((user) => user.id === id);
+  updateUser: async (_, { id, data }, { pubsub, _db }) => {
+    const isUser = await _db.User.findById(id);
 
-    if (user_index === -1) {
+    if (!isUser) {
       throw new Error("User not found");
     }
 
-    const updated_user = (db.users[user_index] = {
-      ...db.users[user_index],
-      ...data,
+    const updated_user = await _db.User.findByIdAndUpdate(id, data, {
+      new: true,
     });
     pubsub.publish("userUpdated", { userUpdated: updated_user });
     return updated_user;
   },
 
-  deleteUser: (_, { id }, { pubsub, db }) => {
-    const user_index = db.users.findIndex((user) => user.id === id);
+  deleteUser: async (_, { id }, { pubsub, _db }) => {
+    const isUser = await _db.User.findById(id);
 
-    if (user_index === -1) {
+    if (!isUser) {
       throw new Error("User not found");
     }
 
-    const deleted_user = db.users[user_index];
-    db.users.splice(user_index, 1);
-
+    const deleted_user = await _db.User.findByIdAndDelete(id);
     pubsub.publish("userDeleted", { userDeleted: deleted_user });
     return deleted_user;
   },
 
-  deleteAllUsers: (_, __, { db }) => {
-    const length = db.users.length;
-    db.users.splice(0, length);
+  deleteAllUsers: async (_, __, { _db }) => {
+    const deleted_users = await _db.User.deleteMany({});
 
     return {
-      count: length,
+      count: deleted_users.deletedCount,
     };
   },
 
-  createPost: (_, { data }, { pubsub, db }) => {
-    const post = {
-      id: nanoid(),
-      title: data.title,
-      user_id: data.user_id,
-      description: data.description,
-      cover: data.cover
-    };
-    db.posts.push(post);
+  createPost: async (_, { data }, { pubsub, _db }) => {
+    const newPost = new _db.Post({
+      ...data,
+    });
+    const post = await newPost.save();
     pubsub.publish("postCreated", { postCreated: post });
     return post;
   },
 
-  updatePost: (_, { id, data }, { pubsub, db }) => {
-    const post_index = db.posts.findIndex((post) => post.id === id);
+  updatePost: async (_, { id, data }, { pubsub, _db }) => {
+    const isPost = await _db.Post.findById(id);
 
-    if (post_index === -1) {
+    if (!isPost) {
       throw new Error("Post not found");
     }
 
-    const updated_post = (db.posts[post_index] = {
-      ...db.posts[post_index],
-      ...data,
+    const updated_post = await _db.Post.findByIdAndUpdate(id, data, {
+      new: true,
     });
     pubsub.publish("postUpdated", { postUpdated: updated_post });
     return updated_post;
   },
 
-  deletePost: (parent, { id }, { pubsub, db }) => {
-    const post_index = db.posts.findIndex((post) => post.id === id);
+  deletePost: async (parent, { id }, { pubsub, _db }) => {
+    const isPost = await _db.Post.findById(id);
 
-    if (post_index === -1) {
+    if (!isPost) {
       throw new Error("Post not found");
     }
 
-    const deleted_post = db.posts[post_index];
-    db.posts.splice(post_index, 1);
+    const deleted_post = await _db.Post.findByIdAndDelete(id);
     pubsub.publish("postDeleted", { postDeleted: deleted_post });
     return deleted_post;
   },
 
-  deleteAllPosts: (_, __, { db }) => {
-    const length = posts.length;
-    db.posts.splice(0, length);
+  deleteAllPosts: async (_, __, { _db }) => {
+    const deleted_posts = await _db.Post.deleteMany({});
 
     return {
-      count: length,
+      count: deleted_posts.deletedCount,
     };
   },
 
-  createComment: (parent, { data }, { pubsub, db }) => {
-    const comment = {
-      id: nanoid(),
+  createComment: async (parent, { data }, { pubsub, _db }) => {
+    const newComment = new _db.Comment({
       ...data,
-    };
-    db.comments.push(comment);
+    });
+    const comment = await newComment.save();
     pubsub.publish("commentCreated", { commentCreated: comment });
     return comment;
   },
 
-  updateComment: (parent, { id, data }, { pubsub, db }) => {
-    const comment_index = db.comments.findIndex((comment) => comment.id === id);
+  updateComment: async (parent, { id, data }, { pubsub, _db }) => {
+    const isComment = await _db.Comment.findById(id);
 
-    if (comment_index === -1) {
+    if (!isComment) {
       throw new Error("Comment not found");
     }
 
-    const updated_comment = (db.comments[comment_index] = {
-      ...db.comments[comment_index],
-      ...data,
+    const updated_comment = await _db.Comment.findByIdAndUpdate(id, data, {
+      new: true,
     });
     pubsub.publish("commentUpdated", { commentUpdated: updated_comment });
     return updated_comment;
   },
 
-  deleteComment: (parent, { id }, { pubsub, db }) => {
-    const comment_index = db.comments.findIndex((comment) => comment.id === id);
+  deleteComment: async (parent, { id }, { pubsub, _db }) => {
+    const isComment = await _db.Comment.findById(id);
 
-    if (comment_index === -1) {
+    if (!isComment) {
       throw new Error("Comment not found");
     }
 
-    const deleted_comment = db.comments[comment_index];
-    db.comments.splice(comment_index, 1);
+    const deleted_comment = await _db.Comment.findByIdAndDelete(id);
     pubsub.publish("commentDeleted", { commentDeleted: deleted_comment });
     return deleted_comment;
   },
 
-  deleteAllComments: (_, __, { db }) => {
-    const length = comments.length;
-    db.comments.splice(0, length);
+  deleteAllComments: async (_, __, { _db }) => {
+    const deleted_comments = await _db.Comment.deleteMany({});
 
     return {
-      count: length,
+      count: deleted_comments.deletedCount,
     };
   },
 };
