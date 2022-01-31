@@ -1,8 +1,7 @@
 const Post = {
-  user: (parent, _, { db }) =>
-    db.users.find((user) => user.id === parent.user_id),
-  comments: (parent, _, { db }) =>
-    db.comments.filter((comment) => comment.post_id === parent.id),
+  user: async (parent, _, { _db }) => await _db.User.findById(parent.user),
+  comments: async (parent, _, { _db }) =>
+    await _db.Comment.find({ post: parent.id }),
 };
 
 module.exports.Post = Post;

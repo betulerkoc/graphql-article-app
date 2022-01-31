@@ -1,8 +1,6 @@
 const User = {
-  posts: (parent, _, { db }) =>
-    db.posts.filter((post) => post.user_id === parent.id),
-  comments: (parent, _, { db }) =>
-    db.comments.filter((comment) => comment.user_id === parent.id),
+  posts: async (parent, _, { _db }) => await _db.Post.find({ user: parent.id }),
+  comments: async (parent, _, { _db }) => await _db.Comment.find({user: parent.id})
 };
 
 module.exports.User = User;
