@@ -20,7 +20,7 @@ const Subscription = {
       (parent, args, { pubsub }) => pubsub.asyncIterator("postCreated"),
       (payload, variables) => {
         return variables.user_id
-          ? payload.postCreated.user_id === variables.user_id
+          ? payload.postCreated.user === variables.user_id
           : true;
       }
     ),

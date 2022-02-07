@@ -1,10 +1,10 @@
 type Query {
     posts: [Post!]!
-    post(id: ID!): Post!
+    post(_id: ID!): Post!
 }
 
 type Post {
-    id: ID!
+    _id: ID!
     title: String!
     user: User!
     cover: String
