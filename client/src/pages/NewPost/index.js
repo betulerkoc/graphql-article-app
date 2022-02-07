@@ -60,14 +60,14 @@ function NewPost() {
           />
         </Form.Group>
           <select
-            value={post.user_id}
+            value={post.user}
             className="form-control"
-            name="user_id"
+            name="user"
             onChange={(e) => handleInputChange(e)}
           >
             {users_data &&
               users_data.users.map((user) => (
-                <option key={user.id} value={user.id}>
+                <option key={user._id} value={user._id}>
                   {user.fullName}
                 </option>
               ))}

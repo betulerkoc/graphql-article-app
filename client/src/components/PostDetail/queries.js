@@ -2,20 +2,20 @@ import { gql } from "@apollo/client";
 
 export const GET_POST = gql`
   query getPost($id: ID!) {
-    post(id: $id) {
-      id
+    post(_id: $id) {
+      _id
       title
       description
       cover
       user {
-        id
+        _id
         fullName
       }
       comments{
-        id
+        _id
         text
         user{
-          id
+          _id
           fullName
         }
       }

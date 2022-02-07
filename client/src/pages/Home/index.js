@@ -32,7 +32,7 @@ function Home() {
 
   return (
     <ListGroup variant="flush">
-      {data.posts.map((post) => <Post key={post.id} data={post}/> )}
+      {data.posts.map((post) => <Post key={post._id} data={post}/> )}
     </ListGroup>
   );
 }

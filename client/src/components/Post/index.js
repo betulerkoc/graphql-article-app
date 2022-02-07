@@ -9,7 +9,7 @@ function Post({ data }) {
           <Image src={data.user.image} rounded />
         </Col>
         <Col sm={10}>
-          <Link to={`/post/${data.id}`}>
+          <Link to={`/post/${data._id}`}>
             <h3>{data.title}</h3>
           </Link>
           <p>{data.description}</p>

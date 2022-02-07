@@ -4,7 +4,7 @@ const Query = {
     return users;
   },
   user: async (_, args, { _db }) => {
-    const user = await _db.User.findById(args.id);
+    const user = await _db.User.findById(args._id);
     return user;    
   },
 
@@ -13,7 +13,7 @@ const Query = {
     return posts;
   },
   post: async(_, args, { _db }) => {
-    const post = await _db.Post.findById(args.id)
+    const post = await _db.Post.findById(args._id)
     return post;
   },
 
@@ -22,7 +22,7 @@ const Query = {
     return comments;
   },
   comment: async(_, args, { _db }) => {
-    const comment = await _db.Comment.findById(args.id);
+    const comment = await _db.Comment.findById(args._id);
     return comment;
   }
 };

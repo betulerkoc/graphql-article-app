@@ -7,8 +7,8 @@ function CommentForm({ post_id }) {
   const [saveNewComment, { loading, error, data }] = useMutation(ADD_COMMENT);
 
   const [comment, setComment] = useState({
-    post_id: post_id,
-    user_id: 1,
+    post: post_id,
+    user: "61f8532f08703d1d8f6c88ec",
   });
 
   const onHandleSubmit = async (e) => {

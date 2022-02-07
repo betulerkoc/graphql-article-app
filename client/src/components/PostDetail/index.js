@@ -37,7 +37,7 @@ function PostDetail() {
           <h6>Comments</h6>
           <Comment />
           {comments.map((comment) => (
-            <Comment commentData={comment} key={comment.id} />
+            <Comment commentData={comment} key={comment._id} />
           ))}
           <CommentForm post_id={id} />
         </Col>
